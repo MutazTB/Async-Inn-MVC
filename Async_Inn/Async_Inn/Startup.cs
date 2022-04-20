@@ -1,4 +1,6 @@
 using Async_Inn.Data;
+using Async_Inn.Services.Implementation;
+using Async_Inn.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +28,9 @@ namespace Async_Inn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IHotels, HotelsRepo>();
+            services.AddTransient<IRooms, RoomRepo>();
+            services.AddTransient<IAminities, AmenitiesRepo>();
             services.AddDbContext<AsyncInnDbContext>(options =>
             {
                 // Our DATABASE_URL from js days

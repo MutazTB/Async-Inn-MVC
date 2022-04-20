@@ -11,3 +11,38 @@ This is a RESTful API server built using ASP.NET Core to allow Async Hotel manag
 * Amenities table has one to many relationship with RoomAmenities table
 * Room table  has one to many relationship with RoomAmenities table
 * RoomAmenities and HotelRoom tables are a Composite tables
+
+
+## Endpoints
+
+### Hotels
+
+| Method | EndPoint | 
+|:-|:-|
+| GET | ```/api/Hotels``` | 
+| POST | ```/api/Hotels``` |
+| GET | ```/api/Hotels/{id}``` |
+| PUT | ```/api/Hotels/{id}``` |
+| DELETE | ```/api/Hotels/{id}``` |
+
+
+### Rooms
+
+| Method | EndPoint | 
+|:-|:-|
+| GET | ```/api/Rooms/``` | |
+| POST | ```/api/Rooms/``` | |
+| GET | ```/api/Rooms/{id}``` | |
+| PUT | ```/api/Rooms/{id}``` | |
+| DELETE | ```/api/Rooms/{id}``` | |
+
+
+### Amenities
+
+| Method | EndPoint | 
+|:-|:-|
+| GET | ```/api/Amenities``` | |
+| POST | ```/api/Amenities``` | |
+| GET | ```/api/Amenities/{id}``` | |
+| PUT | ```/api/Amenities/{id}``` | |
+| DELETE | ```/api/Amenities/{id}``` | |
