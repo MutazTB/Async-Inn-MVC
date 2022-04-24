@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 namespace Async_Inn.Models
 {
     public class HotelRoom
-    {
-        public int Id { get; set; }
-        
-        [ForeignKey("HotelId")]
+    {       
+                
         public Hotel Hotel { get; set; }
 
         public int HotelId { get; set; }
 
         public int RoomNumber { get; set; }
-
-        [ForeignKey("RoomId")]
+       
         public Room Room { get; set; }
 
         public int RoomId { get; set; }

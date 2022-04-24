@@ -44,6 +44,11 @@ namespace Async_Inn.Data
              new Amenities { Id = 2, Name = "Amenity two" },
              new Amenities { Id = 3, Name = "Amenity three" }
            );
+            modelBuilder.Entity<RoomAmenities>().HasKey(
+                x => new { x.AmenitiesId, x.RoomId });
+
+            modelBuilder.Entity<HotelRoom>().HasKey(
+                x => new { x.HotelId, x.RoomNumber });
         }
 
     }

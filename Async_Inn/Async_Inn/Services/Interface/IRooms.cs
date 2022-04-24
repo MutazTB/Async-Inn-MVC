@@ -17,5 +17,9 @@ namespace Async_Inn.Services.Interface
         public Task<Room> UpdateRoom(int id, Room room);
 
         public Task Delete(int id);
+
+        public Task<Room> AddAmenityToRoom(int roomId, int amenityId);
+
+        public Task RemoveAmentityFromRoom(int roomId, int amenityId);
     }
 }
