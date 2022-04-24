@@ -4,6 +4,7 @@ using Async_Inn.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,10 @@ namespace Async_Inn
             services.AddTransient<IHotels, HotelsRepo>();
             services.AddTransient<IRooms, RoomRepo>();
             services.AddTransient<IAminities, AmenitiesRepo>();
+            services.AddTransient<IHotelRoom, HotelRoomRepo>();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddDbContext<AsyncInnDbContext>(options =>
             {
                 // Our DATABASE_URL from js days

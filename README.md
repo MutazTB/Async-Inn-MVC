@@ -46,3 +46,13 @@ This is a RESTful API server built using ASP.NET Core to allow Async Hotel manag
 | GET | ```/api/Amenities/{id}``` | |
 | PUT | ```/api/Amenities/{id}``` | |
 | DELETE | ```/api/Amenities/{id}``` | |
+
+### HotelRooms
+
+| Method | EndPoint | 
+|:-|:-| 
+| GET | ```/api/Hotels/{hotelId}/Rooms``` | |
+| POST | ```/api/Hotels/{hotelId}/Rooms``` | |
+| GET | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
+| PUT | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
+| DELETE | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
