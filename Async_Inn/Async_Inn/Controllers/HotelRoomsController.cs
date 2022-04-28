@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn.Data;
 using Async_Inn.Models;
 using Async_Inn.Services.Interface;
+using Async_Inn.Models.DTOs;
 
 namespace Async_Inn.Controllers
 {
@@ -25,7 +26,7 @@ namespace Async_Inn.Controllers
         // GET: api/HotelRooms
         [HttpGet]
         [Route("{hotelId}/Rooms")]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRoom(int hotelId)
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRoom(int hotelId)
         {
             return await _hotelRoom.GetHotelRooms(hotelId);
         }
@@ -33,7 +34,7 @@ namespace Async_Inn.Controllers
         // GET: api/HotelRooms/5
         [HttpGet]
         [Route("{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelId, int roomNumber)
+        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelId, int roomNumber)
         {
             var hotelRoom = await _hotelRoom.GetHotelRoom(hotelId, roomNumber);
 
@@ -89,7 +90,7 @@ namespace Async_Inn.Controllers
         // DELETE: api/HotelRooms/5
         [HttpDelete]
         [Route("{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(int hotelId, int roomNumber)
+        public async Task<ActionResult<HotelRoomDTO>> DeleteHotelRoom(int hotelId, int roomNumber)
         {
             var hotelRoom = await _hotelRoom.GetHotelRoom(hotelId, roomNumber);
             if (hotelRoom == null)
@@ -104,7 +105,7 @@ namespace Async_Inn.Controllers
 
         private bool HotelRoomExists(int hotelId)
         {
-            return _hotelRoom.GetHotelRooms(hotelId).Result.Any(e => e.HotelId == hotelId);
-        }            
+            return _hotelRoom.GetHotelRooms(hotelId).Result.Any(e => e.HotelID == hotelId);
+        }
     }
 }
