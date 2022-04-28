@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn.Data;
 using Async_Inn.Models;
 using Async_Inn.Services.Interface;
+using Async_Inn.Models.DTOs;
 
 namespace Async_Inn.Controllers
 {
@@ -24,14 +25,14 @@ namespace Async_Inn.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             return await _rooms.GetRooms();
         }
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             var room = await _rooms.GetRoom(id);
 
@@ -61,7 +62,7 @@ namespace Async_Inn.Controllers
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<Room>> PostRoom(RoomDTO room)
         {
             var AddedRoom = await _rooms.Create(room);
 
@@ -80,9 +81,8 @@ namespace Async_Inn.Controllers
         [Route("{roomId}/{amenityId}")]
         public async Task<ActionResult<Room>> AddAmenityToRoom(int roomId, int amenityId)
         {
-            var amenityRoom = await _rooms.AddAmenityToRoom(roomId, amenityId);
-
-            return amenityRoom;
+            await _rooms.AddAmenityToRoom(roomId, amenityId);
+            return NoContent();
         }
 
         [HttpDelete]
@@ -97,9 +97,9 @@ namespace Async_Inn.Controllers
 
             await _rooms.RemoveAmentityFromRoom(roomId, amenityId);
 
-            amenityRoom = await _rooms.GetRoom(roomId);
+             await _rooms.GetRoom(roomId);
 
-            return amenityRoom;
+            return NoContent();
         }
         //private bool RoomExists(int id)
         //{

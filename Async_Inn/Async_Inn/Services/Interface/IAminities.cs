@@ -1,4 +1,5 @@
 ﻿using Async_Inn.Models;
+using Async_Inn.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace Async_Inn.Services.Interface
 {
     public interface IAminities
     {
-        public Task<Amenities> Create(Amenities amenities);
+        public Task<Amenities> Create(AmenityDTO amenities);
 
-        public Task<List<Amenities>> GetAmenitiess();
+        public Task<List<AmenityDTO>> GetAmenitiess();
 
-        public Task<Amenities> GetAmenities(int id);
+        public Task<AmenityDTO> GetAmenities(int id);
 
         public Task<Amenities> UpdateAmenities(int id, Amenities amenities);
 

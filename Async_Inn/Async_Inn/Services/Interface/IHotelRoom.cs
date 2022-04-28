@@ -1,4 +1,5 @@
 ﻿using Async_Inn.Models;
+using Async_Inn.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,10 @@ namespace Async_Inn.Services.Interface
         
         public Task Delete(int hotelId, int roomNumber);
 
-        public Task<List<HotelRoom>> GetHotelRooms(int hotelId);
+        public Task<List<HotelRoomDTO>> GetHotelRooms(int hotelId);
 
-        public Task<HotelRoom> GetHotelRoom(int hotelId, int roomNumber);
+        public Task<HotelRoomDTO> GetHotelRoom(int hotelId, int roomNumber);
         
-        public Task UpdateHotelRoom(HotelRoom hotelRoom);-
+        public Task UpdateHotelRoom(HotelRoom hotelRoom);
     }
 }

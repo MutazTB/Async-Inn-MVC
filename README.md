@@ -56,3 +56,7 @@ This is a RESTful API server built using ASP.NET Core to allow Async Hotel manag
 | GET | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
 | PUT | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
 | DELETE | ```/api/Hotels/{hotelId}/Rooms/{roomNumber}``` | |
+
+
+## DTO and Testing
+Expanded further with DTO's which help to filter Database table information to be more presentable to a user. Routing of different DTO tables was possible through Navigation properties with in DTO's that would later have linq querys .Select made to gather desired data from other data tables.

@@ -35,9 +35,9 @@ namespace Async_Inn.Data
               new Hotel { Id = 3, Name = "Branch three", StreetAddress = "Street three", City = "AlSalt", Phone = "123456789" }
             );
             modelBuilder.Entity<Room>().HasData(
-             new Room { Id = 1, Name = "Room one", Layout = 1 },
-             new Room { Id = 2, Name = "Room two", Layout = 2 },
-             new Room { Id = 3, Name = "Room three" , Layout = 3 }
+             new Room { Id = 1, Name = "Room one", Layout = "1" },
+             new Room { Id = 2, Name = "Room two", Layout = "2" },
+             new Room { Id = 3, Name = "Room three" , Layout = "3" }
            );
             modelBuilder.Entity<Amenities>().HasData(
              new Amenities { Id = 1, Name = "Amenity one" },
