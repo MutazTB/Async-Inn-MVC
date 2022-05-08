@@ -60,3 +60,6 @@ This is a RESTful API server built using ASP.NET Core to allow Async Hotel manag
 
 ## DTO and Testing
 Expanded further with DTO's which help to filter Database table information to be more presentable to a user. Routing of different DTO tables was possible through Navigation properties with in DTO's that would later have linq querys .Select made to gather desired data from other data tables.
+
+## Identity 
+Implemented `Identity Framework`, created DTO's for Login, Register, and User to filter sensative authentication information. Created an `IUser` interface and `IdentityUserService` service to handle the registration and login requests, and integrated that serivce into the UsersController where the Post requests are handled

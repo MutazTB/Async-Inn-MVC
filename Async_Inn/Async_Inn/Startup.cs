@@ -1,9 +1,11 @@
 using Async_Inn.Data;
+using Async_Inn.Models;
 using Async_Inn.Services.Implementation;
 using Async_Inn.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +44,12 @@ namespace Async_Inn
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                // There are other options like this
+            })
+            .AddEntityFrameworkStores<AsyncInnDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
