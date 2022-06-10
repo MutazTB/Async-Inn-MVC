@@ -11,5 +11,8 @@ namespace Async_Inn.Models.DTOs
 
         public string Username { get; set; }
 
+        public string Token { get; set; }
+
+        public IList<string> Roles { get; set; }
     }
 }

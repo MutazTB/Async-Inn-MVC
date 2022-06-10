@@ -8,7 +8,9 @@ namespace Async_Inn.Models.DTOs
 {
     public class RegisterDTO
     {
-        [Required]
+        [Required(ErrorMessage = "You have missed to fill the username")]
+        [Display(Name = "User Name")]
+        [MinLength(3)]
         public string Username { get; set; }
 
         [Required]

@@ -9,9 +9,11 @@ using Async_Inn.Data;
 using Async_Inn.Models;
 using Async_Inn.Services.Interface;
 using Async_Inn.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn.Controllers
 {
+    [Authorize(Roles = "District Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class AmenitiesController : ControllerBase
@@ -23,15 +25,17 @@ namespace Async_Inn.Controllers
             _aminities = aminities;
         }
 
-        // GET: api/Amenities
+        // GET: api/Amenities        
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             return await _aminities.GetAmenitiess();
         }
 
-        // GET: api/Amenities/5
+        // GET: api/Amenities/5        
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<AmenityDTO>> GetAmenities(int id)
         {
             var amenities = await _aminities.GetAmenities(id);
@@ -45,7 +49,7 @@ namespace Async_Inn.Controllers
         }
 
         // PUT: api/Amenities/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenities(int id, Amenities amenities)
         {
@@ -61,6 +65,7 @@ namespace Async_Inn.Controllers
 
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost]
         public async Task<ActionResult<Amenities>> PostAmenities(AmenityDTO amenities)
         {

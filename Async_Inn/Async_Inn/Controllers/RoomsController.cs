@@ -9,9 +9,11 @@ using Async_Inn.Data;
 using Async_Inn.Models;
 using Async_Inn.Services.Interface;
 using Async_Inn.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn.Controllers
 {
+    [Authorize(Roles = "District Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
@@ -24,14 +26,18 @@ namespace Async_Inn.Controllers
         }
 
         // GET: api/Rooms
+        [Authorize(Roles = "Property Manager")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             return await _rooms.GetRooms();
         }
 
         // GET: api/Rooms/5
+        [Authorize(Roles = "Property Manager")]
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             var room = await _rooms.GetRoom(id);
@@ -46,6 +52,7 @@ namespace Async_Inn.Controllers
 
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Property Manager")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
@@ -77,14 +84,16 @@ namespace Async_Inn.Controllers
 
             return NoContent();
         }
+        [Authorize(Roles = "Property Manager")]
+        [Authorize(Roles = "Agent")]
         [HttpPost]
         [Route("{roomId}/{amenityId}")]
         public async Task<ActionResult<Room>> AddAmenityToRoom(int roomId, int amenityId)
         {
             await _rooms.AddAmenityToRoom(roomId, amenityId);
             return NoContent();
-        }
-
+        }        
+        [Authorize(Roles = "Agent")]
         [HttpDelete]
         [Route("{roomId}/{amenityId}")]
         public async Task<ActionResult<Room>> RemoveAmentityFromRoom(int roomId, int amenityId)
