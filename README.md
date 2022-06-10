@@ -63,3 +63,11 @@ Expanded further with DTO's which help to filter Database table information to b
 
 ## Identity 
 Implemented `Identity Framework`, created DTO's for Login, Register, and User to filter sensative authentication information. Created an `IUser` interface and `IdentityUserService` service to handle the registration and login requests, and integrated that serivce into the UsersController where the Post requests are handled
+
+## Roles
+Created a new service class JWTTOkenService3, Registered the new service to our start up file, add the jwtTokenService as a dependency of IdUserService.
+Setup a secret validation in the JWT service and added it to the app configuration.
+After secret validation was possible, Authentication Service as add, and add them to startup. Developred Get/Create token for User login.
+Created UserDto with unique tokens in IdUserService.
+Now a token can be use to login instead of having to send a User name and password.
+Introduced Policies in a away where they can be distrubited among many roles through permissions.
