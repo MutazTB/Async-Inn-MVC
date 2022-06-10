@@ -9,9 +9,11 @@ using Async_Inn.Data;
 using Async_Inn.Models;
 using Async_Inn.Services.Interface;
 using Async_Inn.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn.Controllers
 {
+    [Authorize(Roles = "District Manager")]
     [Route("api/Hotels")]
     [ApiController]
     public class HotelRoomsController : ControllerBase
@@ -24,16 +26,22 @@ namespace Async_Inn.Controllers
         }
 
         // GET: api/HotelRooms
+        [Authorize(Roles = "Property Manager")]
+        [Authorize(Roles = "Agent")]
         [HttpGet]
         [Route("{hotelId}/Rooms")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRoom(int hotelId)
         {
             return await _hotelRoom.GetHotelRooms(hotelId);
         }
 
         // GET: api/HotelRooms/5
+        [Authorize(Roles = "Property Manager")]
+        [Authorize(Roles = "Agent")]
         [HttpGet]
         [Route("{hotelId}/Rooms/{roomNumber}")]
+        [AllowAnonymous]
         public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelId, int roomNumber)
         {
             var hotelRoom = await _hotelRoom.GetHotelRoom(hotelId, roomNumber);
@@ -48,6 +56,8 @@ namespace Async_Inn.Controllers
 
         // PUT: api/HotelRooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Property Manager")]
+        [Authorize(Roles = "Agent")]
         [HttpPut]
         [Route("{hotelId}/Rooms/{roomNumber}")]
         public async Task<IActionResult> PutHotelRoom(int hotelId, HotelRoom hotelRoom)
@@ -78,6 +88,7 @@ namespace Async_Inn.Controllers
 
         // POST: api/HotelRooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Property Manager")]
         [HttpPost]
         [Route("{hotelId}/Rooms")]
         public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId, HotelRoom hotelRoom)

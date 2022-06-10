@@ -1,11 +1,13 @@
 ﻿using Async_Inn.Models;
 using Async_Inn.Models.DTOs;
+using Async_Inn.Services.Implementation;
 using Async_Inn.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Async_Inn.Services
@@ -13,10 +15,12 @@ namespace Async_Inn.Services
     public class IdentityUserService : IUser 
     {
         private UserManager<ApplicationUser> _userManager;
+        private JwtTokenService tokenService;
 
-        public IdentityUserService(UserManager<ApplicationUser> manager)
+        public IdentityUserService(UserManager<ApplicationUser> manager, JwtTokenService jwtTokenService)
         {
-            _userManager = manager;           
+            _userManager = manager;
+            tokenService = jwtTokenService;
         }
 
         public async Task<UserDTO> Authenticate(string username, string password)
@@ -27,8 +31,9 @@ namespace Async_Inn.Services
             {
                 return new UserDTO
                 {
-                    Id = user.Id,
-                    Username = user.UserName,                   
+                    Username = user.UserName,
+                    Token = await tokenService.GetToken(user, System.TimeSpan.FromDays(2)),
+                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
             return null;
@@ -46,11 +51,17 @@ namespace Async_Inn.Services
             var result = await _userManager.CreateAsync(user, data.Password);
 
             if (result.Succeeded)
-            {                                
+            {
+                // here goes the roles specifications ... 
+                IList<string> Roles = new List<string>();
+                Roles.Add("administrator");
+                await _userManager.AddToRolesAsync(user, Roles);
+
                 return new UserDTO
                 {
-                    Id = user.Id,
-                    Username = user.UserName,                    
+                    Username = user.UserName,
+                    Token = await tokenService.GetToken(user, TimeSpan.FromDays(2)),
+                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
 
@@ -67,5 +78,15 @@ namespace Async_Inn.Services
 
             return null;
         }
+
+        public async Task<UserDTO> GetUser(ClaimsPrincipal principal)
+        {
+            var user = await _userManager.GetUserAsync(principal);
+            return new UserDTO
+            {
+                Username = user.UserName
+            };
+        }
     }
 }
+
